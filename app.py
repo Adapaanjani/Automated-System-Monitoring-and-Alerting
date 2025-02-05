@@ -19,7 +19,7 @@ logging.basicConfig(filename=LOG_FILE, level=logging.INFO,
 def send_alert(subject, message):
     sender_email = 'adapaanjani567@gmail.com'
     receiver_email = 'anjaninsssadapa@gmail.com'
-    password = 'nzyx ovii zfox jjfz'
+    password = ''
     
     try:
         with smtplib.SMTP('smtp.gmail.com', 587) as server:
