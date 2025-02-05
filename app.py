@@ -8,9 +8,9 @@ import webbrowser
 # Configuration
 THRESHOLD = 80  # Alert threshold for CPU/RAM
 LOG_FILE = "system_monitor.log"
-SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
-TELEGRAM_BOT_TOKEN = "7568730918:AAGIuiBthiAv72oZuHX5YiJYHB6jyd1pqRk"
-TELEGRAM_CHAT_ID = "5240491483"
+SLACK_WEBHOOK_URL = ""
+TELEGRAM_BOT_TOKEN = ""
+TELEGRAM_CHAT_ID = ""
 
 # Setup logging
 logging.basicConfig(filename=LOG_FILE, level=logging.INFO,
