@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Monitoring Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h2>Real-Time System Monitoring</h2>
+    <canvas id="cpuChart"></canvas>
+    <canvas id="ramChart"></canvas>
+
+    <script>
+        async function fetchStats() {
+            const response = await fetch('/stats');
+            const data = await response.json();
+            return data;
+        }
+
+        async function updateCharts(cpuChart, ramChart) {
+            const stats = await fetchStats();
+            const now = new Date().toLocaleTimeString();
+
+            if (cpuChart.data.labels.length > 10) {
+                cpuChart.data.labels.shift();
+                cpuChart.data.datasets[0].data.shift();
+            }
+            cpuChart.data.labels.push(now);
+            cpuChart.data.datasets[0].data.push(stats.cpu_usage);
+            cpuChart.update();
+
+            if (ramChart.data.labels.length > 10) {
+                ramChart.data.labels.shift();
+                ramChart.data.datasets[0].data.shift();
+            }
+            ramChart.data.labels.push(now);
+            ramChart.data.datasets[0].data.push(stats.ram_usage);
+            ramChart.update();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const cpuCtx = document.getElementById("cpuChart").getContext("2d");
+            const ramCtx = document.getElementById("ramChart").getContext("2d");
+
+            const cpuChart = new Chart(cpuCtx, {
+                type: "line",
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: "CPU Usage (%)",
+                        borderColor: "red",
+                        data: []
+                    }]
+                }
+            });
+
+            const ramChart = new Chart(ramCtx, {
+                type: "line",
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: "RAM Usage (%)",
+                        borderColor: "blue",
+                        data: []
+                    }]
+                }
+            });
+
+            setInterval(() => updateCharts(cpuChart, ramChart), 3000);
+        });
+    </script>
+</body>
+</html>
