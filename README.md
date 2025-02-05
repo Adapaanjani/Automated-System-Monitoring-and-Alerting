@@ -77,7 +77,6 @@ Subject: System Alert
 ## Real-Time Dashboard 📈
 On the **web dashboard**, the CPU and RAM usage are shown in real-time using **Chart.js**. Here’s how it looks:
 
-![Dashboard Example](https://via.placeholder.com/800x400.png)
 
 - **Red Line**: CPU Usage
 - **Blue Line**: RAM Usage
